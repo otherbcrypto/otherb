@@ -5,11 +5,23 @@ otherb Core integration/staging tree
 
 http://otherb.com
 
+ubuntu 18.04
+
+sudo apt-get update
+
+sudo apt-get install build-essential libtool autotools-dev autoconf libssl-dev libboost-all-dev php-memcached python-pylibmc libdb-dev libdb++-dev libevent-dev
+
+git clone http://github.com/otherbcrypto/otherb.git
+
+cd otherb
+
 chmod +x build-aux
 
 chmod +x share/genbuild.sh
 
 mkdir src/config
+
+./autogen.sh - it will error out and work next application below
 
 ./autogen.sh;./configure --without-gui --without-miniupnpc --with-incompatible-bdb;make
 
