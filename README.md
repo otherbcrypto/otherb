@@ -5,6 +5,12 @@ otherb Core integration/staging tree
 
 http://otherb.com
 
+chmod +x build-aux
+
+chmod +x share/genbuild.sh
+
+mkdir src/config
+
 ./autogen.sh;./configure --without-gui --without-miniupnpc --with-incompatible-bdb;make
 
 What is otherb?
