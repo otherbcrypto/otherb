@@ -1,0 +1,81 @@
+policy_module(otherb, 1.100.1)
+
+########################################
+#
+# Declarations
+#
+
+type otherb_t;
+type otherb_exec_t;
+init_daemon_domain(otherb_t, otherb_exec_t)
+
+permissive otherb_t;
+
+type otherb_initrc_exec_t;
+init_script_file(otherb_initrc_exec_t)
+
+type otherb_conf_t;
+files_type(otherb_conf_t)
+
+type otherb_var_lib_t;
+files_type(otherb_var_lib_t)
+
+type otherb_var_run_t;
+files_type(otherb_var_run_t)
+
+type otherb_port_t;
+corenet_port(otherb_port_t)
+
+########################################
+#
+# otherb local policy
+#
+allow otherb_t self:process { fork };
+
+allow otherb_t self:fifo_file rw_fifo_file_perms;
+allow otherb_t self:unix_stream_socket create_stream_socket_perms;
+
+manage_dirs_pattern(otherb_t, otherb_conf_t, otherb_conf_t)
+manage_files_pattern(otherb_t, otherb_conf_t, otherb_conf_t)
+
+manage_dirs_pattern(otherb_t, otherb_var_lib_t, otherb_var_lib_t)
+manage_files_pattern(otherb_t, otherb_var_lib_t, otherb_var_lib_t)
+files_var_lib_filetrans(otherb_t, otherb_var_lib_t, { dir file })
+
+manage_dirs_pattern(otherb_t, otherb_var_run_t, otherb_var_run_t)
+manage_files_pattern(otherb_t, otherb_var_run_t, otherb_var_run_t)
+
+sysnet_dns_name_resolve(otherb_t)
+corenet_all_recvfrom_unlabeled(otherb_t)
+
+allow otherb_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(otherb_t)
+corenet_tcp_sendrecv_generic_node(otherb_t)
+corenet_tcp_sendrecv_all_ports(otherb_t)
+corenet_tcp_bind_generic_node(otherb_t)
+
+gen_require(`
+    type otherb_port_t;
+')
+allow otherb_t otherb_port_t:tcp_socket name_bind;
+
+gen_require(`
+    type otherb_port_t;
+')
+allow otherb_t otherb_port_t:tcp_socket name_connect;
+
+domain_use_interactive_fds(otherb_t)
+
+files_read_etc_files(otherb_t)
+
+miscfiles_read_localization(otherb_t)
+
+sysnet_dns_name_resolve(otherb_t)
+
+allow otherb_t otherb_exec_t:file execute_no_trans;
+allow otherb_t self:process setsched;
+corecmd_exec_ls(otherb_t)
+corenet_tcp_connect_http_port(otherb_t)
+dev_read_urand(otherb_t)
+fs_getattr_xattr_fs(otherb_t)
+kernel_read_system_state(otherb_t)

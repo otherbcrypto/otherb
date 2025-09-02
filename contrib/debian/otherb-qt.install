@@ -1,0 +1,6 @@
+usr/local/bin/otherb-qt usr/bin
+share/pixmaps/otherb32.xpm usr/share/pixmaps
+share/pixmaps/otherb16.xpm usr/share/pixmaps
+share/pixmaps/otherb128.png usr/share/pixmaps
+debian/otherb-qt.desktop usr/share/applications
+debian/otherb-qt.protocol usr/share/kde4/services/
