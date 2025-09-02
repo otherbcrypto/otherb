@@ -1,0 +1,2 @@
+# otherb
+cryptocurrency - scrypt
