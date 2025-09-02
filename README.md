@@ -4,9 +4,8 @@ otherb Core integration/staging tree
 [![Build Status](https://travis-ci.org/otherb-project/otherb.svg?branch=master)](https://travis-ci.org/otherb-project/otherb)
 
 http://otherb.com
-./autogen.sh
-./configure --without-gui --without-miniupnpc --with-incompatible-bdb
-make
+
+./autogen.sh;./configure --without-gui --without-miniupnpc --with-incompatible-bdb;make
 
 What is otherb?
 ----------------
